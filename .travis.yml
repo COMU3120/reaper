@@ -1,23 +1,36 @@
 os: osx
 matrix:
   include:
-    - os: osx
-      osx_image: xcode8.2
-      env: PYTHON=3.5.2
-    - os: osx
-      osx_image: xcode8
-      env: PYTHON=3.5.2
+  - os: osx
+    osx_image: xcode8.2
+    env: PYTHON=3.5.2
+  - os: osx
+    osx_image: xcode8
+    env: PYTHON=3.5.2
 script:
-  - "brew update"
-  - "brew install pyenv"
-  - "pyenv"
-  - env PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 3.5.2
-  - "pyenv local 3.5.2 && /Users/travis/.pyenv/versions/3.5.2/bin/python --version"
-  - "/Users/travis/.pyenv/versions/3.5.2/bin/pip install --upgrade pip"
-  - "/Users/travis/.pyenv/versions/3.5.2/bin/pip --version"
-  - "/Users/travis/.pyenv/versions/3.5.2/bin/pip install socialreaper pyqt5 pyinstaller"
-  - "/Users/travis/.pyenv/versions/3.5.2/bin/pyinstaller -y --windowed --icon=ui/icon.icns reaper.py"
-  - "cd dist && ditto -c -k --sequesterRsrc --keepParent reaper.app reaper-macos.zip"
+- brew update
+- brew install pyenv
+- env PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 3.5.2
+- pyenv local 3.5.2 && /Users/travis/.pyenv/versions/3.5.2/bin/python --version
+- "/Users/travis/.pyenv/versions/3.5.2/bin/pip install --upgrade pip"
+- "/Users/travis/.pyenv/versions/3.5.2/bin/pip --version"
+- "/Users/travis/.pyenv/versions/3.5.2/bin/pip install socialreaper pyqt5 pyinstaller"
+- "/Users/travis/.pyenv/versions/3.5.2/bin/pyinstaller -y --windowed --icon=ui/icon.icns
+  reaper.py"
+- cd dist && ditto -c -k --sequesterRsrc --keepParent reaper.app reaper-macos.zip
 addons:
   artifacts:
-    s3_region: "ap-southeast-2"
+    s3_region: ap-southeast-2
+artifacts:
+  artifacts_key:
+    secure: lw4mXP4ao9GD67+C7WFCZRhwu+71IbNS/LdmaQ9pmVbIpkdgeWwb5U4WLjE1GMN2KlatcBl88uNCWV6nbMG9jooGgaowCze8F9UgcUWStUcOErJ9LCh4JpCgq3oIjk8Ldnq2NUVMqh0IE7Ds4CZNzkG2okKUR9CHbXEE7elr4P2hS3277p1t55gwkQdr6TDVh/UyZOb8L8C/qs0PV8zWAWPxQMT73gjbpltqGralikLgAMow/LaY+5PColbfF+NCO0De9Zfe3k6zd4X76hUFDBrbQcf0s89bXcU0j4Q/HeQfl1mUBDvnKyZ/5i0MG22QBT/G83sgt0y+Jsnqw+zY6Miq5w8+qspwPv/pLTrvvoQURwMrgRUSaeioRi6ALQ+EtgFrHv2c6awJYHUhznFuMCTeinXG+Bji6gUs3AL9Bkd1j8i6VWtQOK77YA8TSbUm8uGp3xNrkjmz4uuSL/iu+oT4Ge2q1mk6mdTZACBBQpIuKh5Sg5rOXRX5bOoprn5WzrQsU1h9V7AIkOxevG+k2skEywQR8r4E+QQueUqE+wf844D0gOi2Ua0ATEmaReuS7b2y5jvEC4Tts1uw7JZdrMl6noneoct09U/5VhWcirCWVvq6lcgc7HWl0SHGXPLtlehxYW786rzsHgMGPiuDx+GmyYfqBX2jwTtopaw5XJ4=
+deploy:
+  provider: s3
+  region: ap-southeast-2
+  access_key_id: AKIAIM3OVQMY56QGMTXQ
+  secret_access_key:
+    secure: eHzbZH33k14H3ybzAmc6Az/+Rmj+gwPl/f18RBPUGVm6aR+BfqFUgwmbDuhyxIxGKPXTmDuqyb3GY2vL7EPqfeIWDQkSMZFUYMaRDHkyXb7grmnjY3qJ9eKGkFIdP4tDqsx8aoV4qY05Bj4SfZo1FO5PnKlaBE/TGMtcAWZzcRSVoVvlMNy7UZILTqtoFsO+IycNbNjTKqe2SLjWjHATgFmK7eb4OWRJud+GcT51NT92O1zdhjsnm9i+MGCXyXc1OKD6UTxdoRZwaFyaiC/rt0ggDU6gLVUY0+ybZfien80mJVDmBiwYyd75QCShOVftSiJ6afJR3xF3r8vRGH2ulhW6VjjwEKclkLhpJHP/4yDFY/R0vyPLfeyKhzkASCokp6/gZACoLbd4GD/7eG0aIMeKrsrnfPNw0FGy7xzaJa+iJdni9eiKmWGCDaqFWTEA01JW8+NFl2mjI6NSLh47OvjjR1ecJYKvQldoh6PnMCxILOpgiDtDejJsrlJODfcbF5M5kOVP/n5tAXRyxswWNV53amzdS4k26a5gMzA14L/HQT4tW9pSP8irPAF/FnnA/vDl7BulV16ZJtB4c1kevyCCnltcEculoPRcnyIMnrrdSLeLVN91GrzlBO4PkXxlVYw8CehgnB6O4TKAoK5A4oww/2SJ7Dz21bziCnsGzWs=
+  bucket: reaper-artifacts
+  acl: ''
+  on:
+    repo: COMU3120/reaper
