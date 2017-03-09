@@ -5,10 +5,10 @@ matrix:
       osx_image: xcode8.2
     - os: osx
       osx_image: xcode8
-install: "pip install -r requirements.txt"
 script:
   - "pyenv install 3.5.3"
   - "pyenv global 3.5.3"
+  - "pip install requirements.txt"
   - "pip install pyinstaller"
   - pyinstaller -y --windowed --icon-ui/icon.icns reaper.py
   - cd dist && ditto -c -k --sequesterRsrc --keepParent reaper.app reaper-macos.zip
