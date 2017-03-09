@@ -21,7 +21,7 @@ install:
 
 build_script:
   - cmd: "pyinstaller reaper.py --windowed --icon=ui/icon.ico --add-data ui\\icon.png;ui"
-  - cmd: "7z a reaper.zip dist\*"
+  - cmd: "7z a reaper.zip dist\\*"
 
 # test_script:
 #   # Run the project tests
