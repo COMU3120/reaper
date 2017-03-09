@@ -6,4 +6,5 @@ matrix:
 python:
   - "3.5"
 install: "pip install -r requirements.txt"
+script: "pip install pyinstaller"
 script: pyinstaller -y --windowed --icon-ui/icon.icns reaper.py && cd dist && ditto -c -k --sequesterRsrc --keepParent reaper.app reaper-macos.zip
