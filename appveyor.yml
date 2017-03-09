@@ -20,8 +20,8 @@ install:
   - cmd: "pip install pyinstaller"
 
 build_script:
-  # Build the compiled extension
   - cmd: "pyinstaller reaper.py --windowed --icon=ui/icon.ico --add-data ui\\icon.png;ui"
+  - cmd: "7z a reaper.zip dist\*"
 
 # test_script:
 #   # Run the project tests
@@ -36,7 +36,7 @@ build_script:
 
 artifacts:
   # Archive the generated packages in the ci.appveyor.com build report.
-  - path: "*"
+  - path: "reaper.zip"
 
 #on_success:
 #  - TODO: upload the content of dist/*.whl to a public wheelhouse
