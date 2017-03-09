@@ -12,7 +12,7 @@ script:
   - "brew install pyenv"
   - "pyenv"
   - "pyenv install 3.5.2"
-  - "pyenv local 3.5.2"
+  - "pyenv local 3.5.2 && python --version"
   - "pip install --upgrade pip"
   - "pip --version"
   - "pip install socialreaper pyqt5 pyinstaller"
