@@ -17,11 +17,11 @@ install:
   - "python --version"
   - cmd: "pip install --upgrade pip"
   - cmd: "pip install -r requirements.txt"
-  - cmd: "pip install pyinstaller"
+  - cmd: "pip install git+git://github.com/pyinstaller/pyinstaller.git"
 
 build_script:
   - cmd: "pyinstaller reaper.py --windowed --icon=ui/icon.ico --add-data ui\\icon.png;ui"
-  - cmd: "7z a reaper.zip dist\\*"
+  - cmd: "7z a reaper.zip dist\\reaper\\"
 
 # test_script:
 #   # Run the project tests
