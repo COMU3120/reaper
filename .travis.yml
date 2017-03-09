@@ -6,8 +6,10 @@ matrix:
     - os: osx
       osx_image: xcode8
 script:
+  - "brew update"
+  - "brew install pyenv"
   - "pyenv install 3.5.2"
-  - "pyenv global 3.5.2"
+  - "pyenv shell 3.5.2"
   - "pip install --upgrade pip"
   - "pip --version"
   - "pip install socialreaper pyqt5 pyinstaller"
