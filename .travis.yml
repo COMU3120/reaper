@@ -3,8 +3,10 @@ matrix:
   include:
     - os: osx
       osx_image: xcode8.2
+      env: PYTHON=3.5.2
     - os: osx
       osx_image: xcode8
+      env: PYTHON=3.5.2
 script:
   - "brew update"
   - "brew install pyenv"
