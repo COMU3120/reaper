@@ -11,7 +11,7 @@ script:
   - "brew update"
   - "brew install pyenv"
   - "pyenv"
-  - "pyenv install 3.5.2"
+  - env PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 3.5.2
   - "pyenv local 3.5.2 && /Users/travis/.pyenv/versions/3.5.2/bin/python --version"
   - "/Users/travis/.pyenv/versions/3.5.2/bin/pip install --upgrade pip"
   - "/Users/travis/.pyenv/versions/3.5.2/bin/pip --version"
