@@ -1,4 +1,8 @@
 language: python
+matrix:
+  include:
+    osx_image: xcode8.2
+    osx_image: xcode8
 python:
   - "3.5"
 install: "pip install -r requirements.txt"
